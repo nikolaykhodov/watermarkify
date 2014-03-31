@@ -1,0 +1,221 @@
+/*
+ * watermark thumbnail
+ */
+@font-face {
+  font-family: Days;
+  src: url(fonts/Days.otf);
+}
+
+.canvas-container {
+  background: white;
+}
+
+.thumbnail {
+  position: relative;
+}
+
+.thumbnail .canvas-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.thumbnail .thumbnail-cursor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 163px;
+  height: 115px;
+  cursor: pointer;
+  z-index: 100;
+}
+
+/* CSS declarations go here */
+
+.loading-wrapper {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100000;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  vertical-align: center;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.content {
+  padding-top: 80px;
+  text-align: center;
+}
+
+.license {
+  text-align: justify;
+}
+
+
+.menu {
+  border-right: 2px dashed #888;
+  text-align: center;
+}
+
+ul.images {
+  list-style-type: none;
+  padding: 0;
+  margin : 0;
+}
+
+ul.images li {
+  width: 200px;
+  height: 150px;
+  border: 1px solid #cecece;
+  background-color: #eeeeee;
+  color: #adadad;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  float: left;
+  margin-left: 10px;
+  margin-top: 10px;
+  padding: 5px;
+  overflow: hidden;
+}
+
+ul.images .filename {
+  text-overflow: ellipsis;
+  width: 190px;
+  margin: 0 auto;
+  overflow: hidden;
+  margin-bottom: 25px;
+  margin-top: 45px;
+}
+
+ul.images .filename:before {
+  content: "";
+  display: block;
+  background: url('../img/photo.png') no-repeat;
+  width: 18px;
+  height: 14px;
+  margin: 0 auto;
+}
+
+ul.images .progress {
+  width: 180px;
+  margin: 0 auto;
+}
+
+ul.images li.uploaded-image {
+  padding: 0;
+  padding-top: 8px;
+  position: relative;
+}
+
+ul.images li .toolbar {
+  position: absolute;
+  bottom: -20px;
+  height: 20px;
+  background-color: rgba(0, 0, 0, 0.75);
+  width: 100%;
+  transition: bottom 0.3s;
+  -webkit-transition: bottom 0.3s;
+  -moz-transition: bottom 0.3s;
+  text-align: center;
+  z-index: 100;
+}
+
+ul.images li .preview {
+  position: absolute;
+  bottom: -150px;
+  height: 150px;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.25);
+  width: 100%;
+  transition: bottom 0.3s;
+  -webkit-transition: bottom 0.3s;
+  -moz-transition: bottom 0.3s;
+  text-align: center;
+  color: white;
+  padding-top: 25%;
+}
+
+ul.images li .preview a {
+  color: white !important;
+}
+
+ul.images li:hover .preview {
+  bottom: 0px;
+}
+
+
+ul.images li:hover .toolbar {
+  bottom: 0px;
+}
+
+
+.toolbar .action {
+  margin: 0px 5px 0px 5px;
+}
+
+.toolbar .action:hover {
+  color: white;
+  cursor: pointer;
+}
+
+.toolbar .rotate-left {
+  -webkit-transform: scale(-1, 1);
+}
+
+.add-files {
+}
+
+.preview-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 10000;
+  background: rgba(255, 255, 255, 0.7);
+  padding-top: 100px;
+}
+
+.preview-wrapper .close {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  width: 24px;
+  height: 24px;
+  background: url('../img/close.png') no-repeat;
+  cursor: pointer;
+}
+
+.preview-wrapper canvas {
+  box-shadow: 10px 10px 5px #888;
+}
+
+.preview-tools {
+  width: 150px;
+}
+
+.preview-tools input.text {
+  width: 110px;
+  float: left;
+}
+
+.preview-tools .btn-colorpicker {
+  line-height: 34px;
+  margin-left: 10px;
+  margin-top: 11px;
+}
+
+.colorpicker {
+  z-index: 100000 !important;
+}

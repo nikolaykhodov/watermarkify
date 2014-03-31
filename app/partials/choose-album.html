@@ -1,0 +1,29 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h4 class="modal-title">Choose album</h4>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-4">
+        <h3>Group</h3>
+        <select ng-model="group" ng-options="g as g.name for g in groups" ng-change="onGroupChanged(group)"></select>
+        <img src="img/loading.gif" ng-show="loadingGroups"/>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-4">
+        <h3>Album</h3>
+        <select ng-model="album" ng-options="a as a.title for a in albums"></select>
+        <img src="img/loading.gif" ng-show="loadingAlbums"/>
+        <span class="glyphicon glyphicon-plus" ng-click="createAlbum(group)" style="cursor: pointer;" ng-show="!loadingAlbums"></span>
+      </div>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="$dismiss()">Cancel</button>
+    <button type="button" class="btn btn-primary" ng-click="$close([album, group])">Choose</button>
+  </div>
+</div><!-- /.modal-content -->

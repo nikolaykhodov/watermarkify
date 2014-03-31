@@ -1,0 +1,59 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h4 class="modal-title">Create an album</h4>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-4">
+        <h3>Group</h3>
+        {{ group.name }}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <h3>Title</h3>
+        <input type="text" ng-model="title">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <h3>Description</h3>
+        <input type="text" ng-model="description">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <h3>Album Privacy</h3>
+        <select ng-model="privacy">
+          <option value="1">Only friends</option>
+          <option value="2">Friends and his/her friends</option>
+          <option value="0">All users</option>
+          <option value="3">Only me</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <h3>Comment Privacy</h3>
+        <select ng-model="comment_privacy">
+          <option value="1">Only friends</option>
+          <option value="2">Friends and his/her friends</option>
+          <option value="0">All users</option>
+          <option value="3">Only me</option>
+        </select>
+      </div>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="$dismiss()">Cancel</button>
+    <button type="button" class="btn btn-primary" ng-click="createAlbum()">
+      <span ng-show="!creating">Create</span>
+      <img src="img/loading.gif" ng-show="creating" />
+    </button>
+  </div>
+</div><!-- /.modal-content -->

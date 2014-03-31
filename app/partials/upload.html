@@ -1,0 +1,116 @@
+<div ng-show="loading" class="loading-wrapper">
+  <div class="loading">
+    Loading...
+  </div>
+</div>
+
+<div class="content" ng-show="!loading">
+  <div class="container">
+    <div class="row">
+      <div class="menu col-md-2">
+        <div>
+          <strong>VKontakte</strong>
+          <div ng-show="loggedIn.vk">
+            Authenticated
+            <a href="javascript:;" onclick="document.cookie='getback=' + encodeURIComponent(document.location.href) + '; path=/'; document.location.href='/auth/logout';">(log out)</a>
+          </div>
+          <div ng-show="!loggedIn.vk">
+            <a href="javascript:;" onclick="document.cookie='getback=' + encodeURIComponent(document.location.href) + '; path=/'; document.location.href='/auth/vk/go';">Log In</a>
+          </div>
+        </div>
+
+        <div>
+          <strong>Album</strong> <a href="javascript:;" ng-click="chooseAlbum()">(choose)</a>
+          <div class="album-title" ng-show="album.title"><a href="http://vk.com/album{{ album.owner_id }}_{{ album.aid }}" target="_blank">{{ album.title }}</a></div>
+        </div>
+
+        <div>
+          <strong>Images ({{ uploaded.length + uploading.length }})</strong>
+          <br/>
+          <button filepicker="onChooseImages" class="add-files btn btn-warning" title="Choose images to be uploaded"><span class="glyphicon glyphicon-plus"></span></button>
+          <button class="btn" ng-click="uploadToVK()"><span class="glyphicon glyphicon-log-out" /></button>
+        </div>
+
+        <div>
+          <strong>Watermark</strong>
+          <br/>
+          <div class="thumbnail" style="margin-top: 5px;">
+            <canvas ng-show="watermark.text != ''" width="163" height="115" text-watermark ng-model="watermark"/>
+
+            <div ng-show="watermark.text != ''" class="thumbnail-cursor" ng-click="showPreviewEditor()" style="cursor: pointer;"> </div>
+
+            <img ng-show="watermark.text == ''" src="http://www.wwubap.org/wp-content/uploads/2012/03/no-available-image.png" style="width: 163px; height: 115px;">
+          </div>
+        </div>
+      </div>
+
+      <ul class="images col-md-8">
+
+        <div style="line-height: 40px;" ng-show="upload.progress > -1">
+          <div class="progress progress-striped active" style="width: 70%;">
+            <div class="progress-bar" ng-style="{'width': upload.progress + '%'}"></div>
+          </div>
+          <a href="javascript:;" ng-click="cancelUploadToVK()">Cancel</a>
+        </div>
+
+        <li ng-repeat="image in uploaded" class="image uploaded-image">
+          <img class="img-responsive" ng-src="{{ image.url }}"/>
+
+          <div class="toolbar">
+            <span class="action glyphicon glyphicon-trash" ng-click="removeImage(image._id)"></span>
+            <span class="action glyphicon glyphicon-repeat" ng-click="rotateImage(image._id, 'right')"></span>
+            <span class="action glyphicon glyphicon-repeat rotate-left" ng-click="rotateImage(image._id, 'left')"></span>
+            <span class="action glyphicon glyphicon-log-out" ng-click="openPreview(watermark, image.url)"></span>
+          </div>
+
+          <a class="preview" href="javascript:;" ng-click="showPreview(image.url)">
+            <span class="action glyphicon glyphicon-resize-full"></span>
+          </a>
+
+        </li>
+
+        <li ng-repeat="image in uploading" class="image uploading-image">
+          <div class="filename" ng-title="{{ image.name }}">{{ image.name }}</div>
+          <div class="progress progress-striped active">
+            <div class="progress-bar" ng-style="{'width':  image.progress + '%'}"></div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="preview-wrapper" ng-show="preview == true && loading == false">
+  <div class="close" ng-click="hidePreview()"></div>
+  <div class="row">
+    <div class="col-md-3 col-md-offset-3">
+      <canvas id="preview" width="455" height="350" image-watermark watermark="watermark" image-url="previewImage"></canvas>
+    </div>
+  </div>
+</div>
+
+<div class="preview-wrapper" ng-show="preview_editor == true && loading == false">
+  <div class="close" ng-click="hidePreviewEditor()"></div>
+  <div class="row">
+    <div class="col-md-3 col-md-offset-3">
+      <canvas id="preview" width="455" height="350" text-watermark ng-model="watermark"></canvas>
+    </div>
+
+    <div class="col-md-3 col-md-offset-3">
+      <div class="preview-tools">
+        <textarea type="text" ng-model="watermark.text" class="form-control text" placeholder="Text..."></textarea>
+        <button type="button" colorpicker class="btn btn-default btn-colorpicker" colorpicker-position="bottom" ng-model="watermark.color" ng-style="{'background-color': watermark.color}" />
+
+        <br style="clear: both;" />
+
+        <h4>Font</h4>
+        <select ng-model="watermark.font" ng-options="font for font in fonts"></select>
+
+        <h4>Font size</h4>
+        <slider floor="0" ceiling="100" step="1" precision="1" ng-model="watermark.size"></slider>
+
+        <h4>Opacity</h4>
+        <slider floor="0" ceiling="100" step="1" precision="1" ng-model="watermark.opacity"></slider>
+    </div>
+  </div>
+</div>
